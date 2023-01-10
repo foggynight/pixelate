@@ -1,0 +1,17 @@
+#!/usr/bin/env python3
+
+from sys import argv
+
+import cv2
+
+def pixelate(in_path, out_path, w, h):
+    img = cv2.imread(in_path)
+    pix = cv2.resize(img, (w, h), interpolation=cv2.INTER_AREA)
+    cv2.imwrite(out_path, pix)
+
+if __name__ == "__main__":
+    if len(argv) < 3:
+        error("missing arguments")
+    w = int(argv[2])
+    h = int(argv[3]) if len(argv) > 3 else w
+    pixelate(argv[1], argv[2], w, h)
